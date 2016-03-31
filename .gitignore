@@ -45,3 +45,13 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.aux
+bare_jrnl.pdf
+*.gz
+bare_jrnl.tex
+ieee_taxonomy_v101.pdf
+PL_Kar_LH_FWPM_Stats1.tex
+PL_Kar_LL_FWPM_Stats1.tex
+PL_Kar_LL_FWPM_Stats.tex
+*.blg
+tj_Journ_paper.log
