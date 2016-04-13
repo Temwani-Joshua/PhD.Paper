@@ -27,7 +27,7 @@
 	\tikzstyle{every node}=[font=\small]
 
 %\usepackage[tight,footnotesize]{subfigure} % option 'tight' reduces white space
-\usepackage[caption=false,font=footnotesize,farskip=2pt]{subfig}
+\usepackage[caption=false,font=footnotesize,farskip=3pt]{subfig} %
 %\usepackage{fixltx2e} % helps with floats
 %\usepackage{stfloats} % put floats at top and bottom of the page
 
@@ -37,6 +37,7 @@
 %	\setlist{nolistsep}
 \usepackage[detect-all]{siunitx}
 \usepackage{cite}
+\usepackage{url}
 
 %\usepackage[pdftex, bookmarks, breaklinks]{hyperref}
 
@@ -47,6 +48,7 @@
 \begin{document}
 \bstctlcite{tj_journ_paper:BSTcontrol}
 \title{MoM-based Path Loss Modelling in Rural Areas}
+%\urlstyle
 %%\IEEEauthorblockN{} % author name
 %\IEEEauthorblockA{} % author affliation
 
@@ -69,7 +71,7 @@ Africa (email: temwanijoshua@outlook.com; davidson@sun.ac.za; wiidg@sun.ac.za)}}
 %
 \begin{abstract}
 % As a general rule, do not put math, special symbols or citations in the abstract
-MeerKAT is a strategic Square Kilometre Array (SKA) precursor instrument designed to demonstrate and develop relevant technology in the mid-frequency band (\SI{350}{MHz} - \SI{3050}{MHz}). Maintaining the electromagnetic quietness of the telescope's environment is key in achieving the intended scientific objectives. In the furtherance of good EMC and spectrum management practices, we have embarked on a full electromagnetic (EM) site evaluation of the MeerKAT facility. Propagation modelling is the first step in this process with a three-fold rationale: i) there is some debate within the SKA over which models should be used; ii) RFI engineers working at the MeerKAT facility need propagation tools that are reliable and easy to implement for routine RFI monitoring; iii) it has been observed that a systematic approach for site characterization of radio observatories is lacking. In view of the multiple site location of the SKA, and particularly other sites in Africa, it is imperative to establish and standardize evaluation procedures.
+Path loss is an important parameter for coverage mapping and spectrum management. Of special interest in this study is the modelling of path loss at low antenna heights (under \SI{10}{m}) and short ranges (less than \SI{1}{km}). This is of relevance to site evaluation of advanced radio telescopes such as MeerKAT in respect of computing RFI threshold levels and investigating coupling mechanisms. Previously, RFI thresholds have been based on free space loss predictions and are therefore inaccurate. We present a full-wave propagation model (FWPM) for path loss modelling in rural areas. Electrical characteristics of the earth are included and full antennas are modelled in order to reproduce a real world scenario. Statistical error analysis of the predictions yields an unprecedented RMSE of less than \SI{4}{dB} when compared to measurements obtained at the MeerKAT facility.
 \end{abstract}
 %
 %\IEEEpeerreviewmaketitle % needed for peer review papers
@@ -78,12 +80,12 @@ MeerKAT is a strategic Square Kilometre Array (SKA) precursor instrument designe
 \IEEEPARstart{P}{ropagation} modelling is an important tool in the roll-out of a radio link with respect to assessing interference effects in the intervening path. The goal is to quantify the degree of signal degradation between wireless transceivers due to reflection, diffraction, scattering and other propagation phenomena besides spreading (free space) loss. Expressed as the ratio of transmitted to received power, the extent of signal attenuation is called \emph{path loss}. It is a vital parameter for coverage mapping and spectrum management \cite{Rappaport,Seybold}. Numerous path loss prediction tools utilizing theoretical, statistical, empirical and deterministic schemes have been developed over the last seven decades \cite{Phillips:Survey,Sarkar:Survey}. This highlights the significance of propagation modelling in planning various types of wireless networks. %Two broad categories exist: large-scale models where transmitter-receiver (T-R) separation distances are generally on the order of tens and hundreds of kilometres such as in broadcast services; fading or small-scale models that are concerned with fluctuations in received power over short T-R lengths such as in mobile communications and wireless local area networks (WLAN).\\ %Models involving shorter T-R distances ($<\SI{1}{km}$) are typically employed when assessing indoor propagation channels as well as outdoor propagation in urban areas.\\%
 Empirical models (synthesized based on multiple measurements) tend to be most common due to their ease of implementation. However, the predictions quickly become inaccurate when they are employed in an environment other than the one on which the data is based. On the other end of the spectrum, deterministic models (derived from Maxwell's equations) offer high accuracy but require detailed information of the environment (site-specific) and are computationally expensive \cite{Sarkar:Survey,Abhayawardhana}.\\
 Unsurprisingly, the vast majority of models focus on mobile radio services in urban areas as well as FM radio and television broadcast services. In the former case, propagation is typically by diffraction and scattering since there are seldom line of sight (LoS) paths. Consequently, a multipath environment exists since the received signal is a superposition of several delayed waves \cite{Harada:2002}. In this regime, multipath fading -- the variability of the wave due to constructive and destructive interference -- becomes particularly important and is accounted for using a Rayleigh probability distribution \cite{Raisanen:2003}. %a Rician probability distribution if a LoS path exists 
-In the latter scenario, high antenna heights and long distances proliferate the dominance of atmospheric scattering and refraction as the characteristic propagation effects. %wherefore radio waves travel a longer distance than the LoS path. Time variability must be considered due to atmospheric variations (changes in the refractive index)
+In the latter scenario, atmospheric scattering and refraction are the characteristic propagation effects. The physical configuration involves transmitting (base) stations that are hundreds of metres high with a coverage radius extending a few tens of kilometres. %wherefore radio waves travel a longer distance than the LoS path. Time variability must be considered due to atmospheric variations (changes in the refractive index)
 One thus finds that models addressing propagation in open areas are few and far between and do not typically consider short transmitter-receiver (T-R) separation distances. With the outset of advanced and highly sensitive radio telescopes such as the Square Kilometre Array (SKA), probing signal propagation at path lengths and heights that differ from conventional telecommunication standards becomes important. Moreover, literature is thin on propagation modelling to aid electromagnetic characterization of radio astronomy facilities. %It is often supposed that under a kilometre path loss can be taken as equal to free space loss. However, this is only true when there are no obstructions in the first Fresnel zone between two transceivers.
 %At path lengths less than \SI{100}{km}, losses in received signal strength are dominated by reflection and diffraction, in addition to free space loss \cite{SKAEMI}.
-We thus present a novel full wave propagation model (FWPM) based on the method of moments (MoM) for path loss predictions at T-R lengths less than \SI{1}{km}. Electrical properties of the earth are taken into account and simulated as a dielectric ground plane. Combined with the full-wave nature of the model, the ground-reflected wave is thus approximated very well. In its present form, the FWPM has no restriction on frequency but is presently limited to the range \SI{100}{} -- \SI{2700}{MHz} which falls within the mid-frequency band of the SKA. As a case study, comparisons of the FWPM predictions are made to measured data obtained at the  MeerKAT facility in South Africa's semi-desert Karoo region. Statistical error analysis yields an unprecedented \SI{3.28}{dB} root mean square error.
+We thus present a novel full-wave propagation model (FWPM) based on the method of moments (MoM) for path loss predictions at T-R lengths less than \SI{1}{km}. Electrical properties of the earth are taken into account and simulated as a dielectric ground plane. Combined with the full-wave nature of the model, the ground-reflected wave is thus approximated very well. In its present form, the FWPM has no restriction on frequency but is presently limited to the range \SI{100}{} -- \SI{2700}{MHz} which falls within the mid-frequency band of the SKA. As a case study, comparisons of the FWPM predictions are made to measured data obtained at the  MeerKAT facility in South Africa's semi-desert Karoo region. Statistical error analysis yields an unprecedented \SI{3.08}{} and \SI{3.57}{dB} root mean square error for the two configurations considered.
 
-The paper is fashioned with an overview on propagation modelling in Section \ref{Overview of Propagation Modelling} which introduces the statistical metrics used in the study. In Section \ref{The Full-Wave Propagation Model} a description of the FWPM is provided and validated by a comparison to the Friis transmission equation. The main contributions are highlighted in Section \ref{Comparison of FWPM Predictions to Measured Data} where statistical analysis is made against measured data. Summary statements are made in Section \ref{Conclusion}.  
+The paper is fashioned with an overview on propagation modelling in Section \ref{Overview of Propagation Modelling} which introduces the statistical metrics used in the study. In Section \ref{The Full-Wave Propagation Model} a description of the FWPM is provided and validated by a comparison to the Friis transmission equation. The main contributions are highlighted in Section \ref{Comparison of FWPM Predictions to Measured Data} where statistical analysis is made against measured data. Concluding remarks are presented in Section \ref{Conclusion}.  
 
 \section{Overview of Propagation Modelling}\label{Overview of Propagation Modelling}
 \subsection{Basic Modelling}
@@ -96,13 +98,13 @@ P_r = \text{EIRP} + G_r - PL,
 where $P_r$ is the received power in \SI{}{dBm}, $\text{EIRP} = P_t + G_t$ is the effective isotropic radiated power (\SI{}{dBm}), $G_t$ and $G_r$ are the respective transmitter and receiver gains in \SI{}{dBi}. The term $PL$ (\SI{}{dB}) is the attenuation (path loss) due to environmental and propagation effects given as
 \begin{equation}
 \label{eqn:PL}
-PL = L_{fsl} + L_{\text{env}},
+PL = L_{\text{fsl}} + L_{\text{env}},
 \end{equation}
-where $L_{fsl}$ is the free space loss derived from the Friis transmission formula   %\footnote{The more accurate term for free space loss is \emph{spreading loss} since it is the result of the inverse square law \cite{Haslett}} %
+where $L_{\text{fsl}}$ is the free space loss derived from the Friis transmission formula   %\footnote{The more accurate term for free space loss is \emph{spreading loss} since it is the result of the inverse square law \cite{Haslett}} %
 with isotropic transceivers as the reference. The term $L_{\text{env}}$ is the loss due to reflection, diffraction or scattering depending on the propagation mode and surrounding medium\footnote{Small-scale fading effects are neglected here}. In cases where a LoS path exists and the antennas are several wavelengths above the ground, equation (\ref{eqn:PL}) can be approximated as 
 \begin{equation}
 \label{eqn:FSL}
-PL = L_{fsl} = 10\log\left[ \left(\dfrac{4\pi d_mf}{c}\right)^2 \right],
+PL = L_{\text{fsl}} = 10\log\left[ \left(\dfrac{4\pi d_mf}{c}\right)^2 \right],
 % = 10\log\left[ \dfrac{p_t}{p_r} \right]
 \end{equation}
 %where the term in parenthesis is the free space loss factor with %
@@ -121,7 +123,7 @@ where f (\SI{}{Hz}) is the carrier frequency, $d_m$ (\SI{}{m}) is the T-R length
 In practical units, equation (\ref{eqn:FSL}) is given as
 \begin{equation}
 \label{eqn:FSL2}
-L_{fsl} = 20\log\left( f \right) + 20\log\left( d \right) + 32.45,
+L_{\text{fsl}} = 20\log\left( f \right) + 20\log\left( d \right) + 32.45,
 \end{equation}
 with $f$ in \SI{}{MHz} and $d = 10^{-3}d_m$ in \SI{}{km}.\\
 Propagation models strive to predict as accurately as possible the loss $L_{\text{env}}$. The general input parameters include frequency, antenna heights and T-R separation. More complex models such as the Longley-Rice Irregular Terrain Model (ITM) and the ITU-R P.\num{452} model can incorporate terrain data in order to account for diffraction loss due to obstructions. Effectiveness of a model in predicting path attenuation depends on its input parameters as well as whether the model is applied within its coverage range. A wide survey of various models and how they predict $PL$ is presented in \cite{Phillips:Survey}.  %Here, only two are briefly described.%
@@ -140,7 +142,7 @@ Propagation models strive to predict as accurately as possible the loss $L_{\tex
 \subsection{Statistical Analysis Metrics}
 %First order statistics were used to evaluate the performance of the models implemented in this study.
 \subsubsection{Prediction Error and Root Mean Square Error}
-The prediction error, $\varepsilon$\footnote{Not to be confused with permittivity, $\epsilon$}, is the most basic of metrics in evaluating a propagation  model. It is the difference between the measured %\footnote{typically the median value across multiple measurements/predictions}
+The prediction error, $\varepsilon$, is the most basic of metrics in evaluating a propagation  model. It is the difference between the measured %\footnote{typically the median value across multiple measurements/predictions}
 and predicted value of path loss, given for a specific path as
 \begin{equation}
 	\label{eq:pred_error1}
@@ -170,7 +172,7 @@ Relative Error (RE) is the magnitude of the prediction error weighted by the mea
 from which the accuracy $A_m = (1 - \text{RE}_m)\times 100$, can be calculated. The accuracy provides a confidence level for a models prediction.
 %
 \subsubsection{Correlation Coefficient}
-Linearity between measurement and predictions is determined by the correlation coefficient
+Linear closeness between measurement and predictions is determined by the correlation coefficient
 %The computation here is based on Pearson's product moment formulation,
 \begin{equation}
 	\rho = \dfrac{ \displaystyle N\sum_{i=1}^{N} PL_{\text{meas}} PL_{m,i} - \sum_{i=1}^{N} PL_{\text{meas}} \sum_{i=1}^{N} PL_{m,i} } { \displaystyle \left( N-1 \right) \sum_{i=1}^{N} PL_{\text{meas}} \sum_{i=1}^{N} PL_{m,i} }.
@@ -178,23 +180,23 @@ Linearity between measurement and predictions is determined by the correlation c
 It must be noted here that strong correlation will not necessarily mean that a model performs well but rather indicates that the model exhibits similar trends as the measured data.
 %
 \section{The Full-Wave Propagation Model}\label{The Full-Wave Propagation Model}
-Numerical solutions to Maxwell's equations that make no \emph{a priori} physical approximations are called full-wave techniques \cite{Davidson2011}. Computational electromagnetics (CEM) offers a number of such methods which are described in several texts (see \cite{Davidson2011,Jin,Gibson}). The full-wave propagation model (FWPM) described here is based on the method of moments (MoM) and incorporates a dielectric ground plane to simulate the influence of the earth.%
+Numerical solutions to Maxwell's equations that make no \emph{a priori} physical approximations are called full-wave techniques \cite{Davidson2011}. Computational electromagnetics (CEM) offers a number of such methods which are described in several texts (see \cite{Davidson2011,Jin,Gibson}). The full-wave propagation model (FWPM) described here is based on the method of moments (MoM) implemented via the FEKO software suite. Other full-wave implementations are described in \cite{Hviid95,Yagbasan2010,Brennan2014}. % It incorporates a dielectric ground plane to simulate the influence of the earth.%
 %
 \subsection{The Method of Moments}
-The MoM is a frequency domain full-wave technique well suited to problems involving radiation and scattering. The method utilizes an appropriate Green function to derive an integro-differential form of Maxwell's equations. To reduce the number of unknowns and make the problem tractable computationally, a suitable boundary condition and \emph{basis functions} must be selected. %Basis functions make it to possible to discretise the unknown quantity. %surface charge density %
-This results in a system of linear equations of the form \cite{Jin},
+The MoM is a frequency domain full-wave technique widely used in antenna engineering as it is well suited to problems involving radiation and scattering. The method utilizes an appropriate Green function to derive an integro-differential form of Maxwell's equations. To reduce the number of unknowns and make the problem tractable computationally, a suitable boundary condition and \emph{basis functions} must be selected. This results in a system of linear equations of the form \cite{Jin},
 \begin{equation}
  V_m  = \sum\limits_{n=1}^{N-1} Z_{mn} I_n, \qquad m = 1,2,...,N-1
 \end{equation}
-where $Z_{mn}$ is called the system matrix, $V_m$ is the source vector and $I_n$ is the unknown vector that is solved for using LU-factorization. Subscript $m$ represents sampling points while $n$ refers to source points.\\
-A key advantage in using the MoM formulation is that discretisation is limited to the radiating or scattering structure only, since it is a \emph{source} method. In contrast, field methods require that free space be discretised as well. The MoM implementation in the FEKO software suite includes extensions that that enable the modelling of dielectrics. Of special interest here is the Sommerfeld formulation and reflection coefficient approximation for simulating of ``real ground''.
+where $Z_{mn}$ is called the system matrix, $V_m$ is the source vector and $I_n$ is the unknown vector that is solved for using LU-factorization. Subscript $m$ represents sampling points while $n$ refers to source points. %A key advantage in using the MoM formulation is that discretisation is limited to the radiating or scattering structure only, since it is a \emph{source} method. In contrast, field methods require that free space be discretised as well.
+The MoM implementation in the FEKO software suite includes extensions that enable the modelling of dielectrics. Of special interest here is the Sommerfeld formulation and reflection coefficient approximation that are used to simulate `real ground'.
 %
 \subsection{Antenna Characteristics}
-The quality of radiation source data is a vital part of the FWPM. The initial intention had been to generate the data using half-wave dipoles but mismatch effects were too significant over the designed frequency range. In keeping with a relatively simple design, log-periodic dipole array (LPDA) antennas were realized in Antenna Magus and subsequently exported to FEKO. An arithmetic bandwidth of \num{160} was achieved with \num{27} elements parametrized by a spacing factor of \num{0.131}. Load and input impedances were $\SI{292.19}{\Omega}$ and $\SI{200}{\Omega}$, respectively. Simulation runs in the `low frequency' (\SI{100}{} - \SI{900}{MHz}) range utilized an LPDA design with a centre frequency of \SI{500}{MHz} while the 'high frequency' setup (\SI{900}{} - \SI{2700}{MHz}) used a centre of frequency of \SI{1500}{MHz}. The gain and reflection coefficient of the `high frequency' antenna are shown in  Fig \ref{fig:gain_s11}.   %A voltage source  was applied at the transmitting antenna so that the far field data could be obtained.
+The quality of radiation source data is a vital part of the FWPM. The initial intention had been to generate the data using half-wave dipoles but mismatch effects were too significant over the desired frequency range. In keeping with a relatively simple design, log-periodic dipole array (LPDA) antennas were realized in Antenna Magus and subsequently exported to FEKO. A bandwidth of \SI{160}{\%} was achieved with centre frequencies of \SI{500}{MHz} for band 1 (\SI{100}{} - \SI{900}{MHz}) and \SI{1500}{MHz} for band 2 (\SI{900}{} - \SI{2700}{MHz}). Parametrized by a spacing factor of \num{0.131}, \num{27} elements were used for each antenna. Load and input impedances were $\SI{292.19}{\Omega}$ and $\SI{200}{\Omega}$, respectively. %Simulations were ran in two bands: band \num{1} was defined as \SI{100}{} - \SI{900}{MHz} while band \num{2} covered \SI{900}{} - \SI{2700}{MHz}. The corresponding centre frequencies for the LPDA's operating in the two bands were \SI{500}{MHz} and \SI{1500}{MHz}.
+Fig \ref{fig:gain_s11} shows the gain and reflection coefficient of the antennas.
 \begin{figure}%
 	\centering
-	\includegraphics[width=\linewidth]{antenna_gain_s11}%
-	\caption{Characteristic gain (\SI{}{dBi}) and reflection coefficient ($S_{11}$, \SI{}{dB}) of the LPDA used for the FWPM simulations}%
+	\includegraphics[width=\linewidth]{antenna_gain_s11_full}%
+	\caption{Gain (\SI{}{dBi}) and reflection coefficient ($S_{11}$, \SI{}{dB}) of the LPDA's used for the FWPM simulations. The vertical dash-dot line corresponds to \SI{900}{MHz} and demarcates the transition from band \num{1} to band \num{2}.}%
 	\label{fig:gain_s11}%
 \end{figure}%
 %
@@ -203,7 +205,7 @@ The quality of radiation source data is a vital part of the FWPM. The initial in
 Radio wave transmission that takes place in the vicinity of the earth is called ground wave propagation. Three waves are to be considered in general: surface, direct and ground-reflected waves. In many scenarios the contribution of the surface wave is negligible so that the received wave is predominantly the sum of the direct and ground-reflected waves, collectively called the space wave. In view of reflections, the electrical characteristics of the ground must be taken into account.%
 %
 \subsubsection{Complex Permittivity}
-Given a dielectric medium of permittivity $\epsilon$ and effective conductivity $\sigma$, the Maxwell-Ampere equation can be written as \cite{Jordan}
+Given a dielectric medium of permittivity $\epsilon$\footnote{Not to be confused with prediction error, $\varepsilon$} and effective conductivity $\sigma$, the Maxwell-Ampere equation can be written as \cite{Jordan}
 \begin{equation}
 \nabla \times \mathbf{H} = j\omega\epsilon\mathbf{E} + \sigma \mathbf{E} = j\omega\left[ \epsilon - j\dfrac{\sigma}{\omega} \right]\mathbf{E} = j\omega\dot{\epsilon}\mathbf{E},
 \end{equation}
@@ -239,9 +241,9 @@ where $E$ and $E_0$ represent the received and free space electric fields, respe
 \end{equation}
 accounts for the phase difference between the direct and reflected waves where
 \[ R_1 = d_m \sqrt{\left(\dfrac{h_t - h_r}{d_m} \right)^2 + 1} \]
-and the reflected  
+and 
 \[ R_2 = d_m \sqrt{\left(\dfrac{h_t + h_r}{d_m} \right)^2 + 1}, \]
-with $d_m$ as the T-R length in metres as before.
+with $d_m$ as the T-R length in metres as before. A schematic of the configuration is shown in Fig \ref{fig:reflection}.
 
 Reflection at the interface of two media is a well known and widely discussed phenomenon. For dielectrics, the reflection coefficient will be a function of the ratio of the permittivity of the two media, polarization and angle of incidence. It can be shown that setting the relative complex permittivity of the earth to $\dot\epsilon_r$ yields \cite{Balanis:Electro,Jordan}
 \begin{equation}
@@ -257,7 +259,7 @@ R_h = \dfrac{ \sin\psi - \sqrt{\dot\epsilon_r - \cos^2\psi} }{ \sin\psi + \sqrt{
 as the %where $R_v$ and $R_h$ are
 the reflection coefficients for vertical (parallel) and horizontal (perpendicular) polarizations with
 \begin{equation}
-\psi = \arctan\left(\dfrac{h_t + h_r}{d_m} \right)
+\psi = 90^\circ - \theta = \arctan\left(\dfrac{h_t + h_r}{d_m} \right)
 \end{equation}
 as the angle of incidence (Fig~\ref{fig:reflection}). 
 \begin{figure}
@@ -272,7 +274,7 @@ as the angle of incidence (Fig~\ref{fig:reflection}).
 	    \draw[<->] (6,0) ++(180:1) arc(180:153:1); \draw (4.8,0.0) node[above]{$\psi$};
 	    \draw[<->] (6,0) ++(153:1) arc(153:90:1); \draw (5.4,0.8) node[above]{$\theta$};
 	    \draw (0,-0.5) -- (0.5,0); \draw (0.5,-0.5)--(1,0); \draw (1,-0.5)--(1.5,0); \draw (1.5,-0.5)--(2,0); \draw (2,-0.5)--(2.5,0); \draw (2.5,-0.5)--(3,0); \draw (3,-0.5)--(3.5,0); \draw (3.5,-0.5)--(4,0); \draw (4,-0.5)--(4.5,0); \draw (4.5,-0.5)--(5,0); \draw (5,-0.5)--(5.5,0); \draw (5.5,-0.5)--(6,0); \draw (6,-0.5)--(6.5,0); \draw (6.5,-0.5)--(7,0); \draw (7,-0.5)--(7.5,0); \draw (7.5,-0.5)--(8,0);
-	    \draw (1.2,-0.7) node[fill = white, above]{$\epsilon_2=\epsilon{'}$};
+	    \draw (1.2,-0.7) node[fill = white, above]{$\epsilon_2=\dot\epsilon$};
 	     \draw (0,0) -- (0,1) node[antenna]{};
 	     \draw (8,0) node[antenna]{};
 %		\draw (0,0) -- (0,3);
@@ -304,19 +306,14 @@ while for horizontal polarization it is
 \end{equation}
 %In both equations (\ref{eq:atten_arg_v}) and (\ref{eq:atten_arg_h}) $d_m$ is the path length in metres as before.\\
 
-The FWPM results presented here make use of the reflection coefficient approximation which does not compute the surface wave. However, at the expense of shorter simulation runtime the model can be set to utilize the full Sommerfeld formulation which will incorporate the contribution of the surface wave to the received field. %It must be noted that the simulation runtime doubles when the Sommerfeld equations are . %Surface wave contributions are neglected here as they have been found to be insignificant in the configuration of interest.
+The FWPM results presented here make use of the reflection coefficient approximation which does not compute the surface wave. However, at the expense of longer simulation runtime the model can be set to utilize the full Sommerfeld formulation which will incorporate the contribution of the surface wave to the received field. %It must be noted that the simulation runtime doubles when the Sommerfeld equations are . %Surface wave contributions are neglected here as they have been found to be insignificant in the configuration of interest.
 %
 \subsection{Simulation Setup and Validation}
-%Log-Periodic Dipole Antenna (LPDA)  designs were realized in Antenna Magus and subsequently exported to FEKO. A voltage source  was applied at the transmitting antenna so that the far field data could be obtained.
 Simulated path loss was computed via S-Parameters as
 \begin{equation}
-PL_s = 10\log \left|\dfrac{1}{ S_{21}{'}}\right|^2 + 2G %\equiv 10\log\left( \dfrac{\text{power radiated}}{\text{power received}} \right)
-,
+PL_s = 10\log \left|\dfrac{1}{ S_{21}{'}}\right|^2 + 2G,
 \end{equation}
-where $\left|S_{21}{'}\right|^2 \equiv \text{power received}/\text{power radiated}$ is the transmission coefficient corrected for mismatch and $G$ is the gain of transmitter and receiver in \SI{}{dBi}. %The subscript $s$ denotes simulation.
-%
-%\subsubsection{Free Space Modelling}
-To ensure that the FEKO model was correctly configured, a comparison was made to theory (equation (\ref{eqn:FSL2})). As can be seen from the sample result in Fig \ref{fig:sim_fsl}, the simulated prediction is in good agreement with the theoretical formulation of the Friis transmission equation. This is quite a remarkable result that highlights the power of a full-wave simulation.
+where $\left|S_{21}{'}\right|^2 \equiv \text{power received}/\text{power radiated}$ is the transmission coefficient corrected for mismatch and $G$ is the gain of transmitter and receiver in \SI{}{dBi}. To ensure that the FEKO model was correctly configured, a comparison was made to theory (equation (\ref{eqn:FSL2})). As can be seen from the sample result in Fig \ref{fig:sim_fsl}, the simulated prediction is in good agreement with the theoretical formulation of the Friis transmission equation. This is quite a remarkable result that highlights the power of a full-wave simulation. % What is the power of a full-wave simulation??
 \begin{figure}
 	\centering
 	{\includegraphics[width=\linewidth]{path_loss_verification_50m}}
@@ -327,9 +324,7 @@ To ensure that the FEKO model was correctly configured, a comparison was made to
 \section{Comparison of FWPM Predictions to Measured Data}\label{Comparison of FWPM Predictions to Measured Data}
 %
 \subsection{Measurements in a Controlled Environment}
-Path loss results can change quite dramatically when transmission takes place in the vicinity of the ground such as when transceiver heights are low. %How well a model predicts attenuation depends on the \emph{a priori} information it receives regarding the propagation path and environment. %such as terrain profile.
-In a `simple' scenario involving a flat ground, the key issue for the FWPM is with regard to the value of $\dot\epsilon_r$ in modelling the electrical characteristics of the earth. Actual conditions of the soil will seldom be known and some intuitive guesses may be required.\\ %To avoid being subjective, 
-Predictions from three types of simulated `ground' were compared to measured data that was obtained at a field akin to an open area test site. A summary of the equipment used is presented in Table~\ref{tb:specs1}.\\
+Path loss results can change quite dramatically when transmission takes place in the vicinity of the ground such as when transceiver heights are low. In a `simple' scenario involving a flat ground, the key issue for the FWPM is with regard to the value of $\dot\epsilon_r$ in modelling the electrical characteristics of the earth. Conditions of the soil change with seasonal variations so that the actual electrical parameters will seldom be known. A working approximation must thus be established. To do this, predictions from three types of simulated ground were compared to measured data that was obtained at a field akin to an open area test site. A summary of the equipment used is presented in Table~\ref{tb:specs1}.
 %
 \begin{table} %[!h]
 	\renewcommand{\arraystretch}{1.5}
@@ -350,54 +345,57 @@ Predictions from three types of simulated `ground' were compared to measured dat
 		\end{tabular}
 \end{table}
 %
-A PCB-LPDA was connected to the Anapico DC signal generator to form the transmitting unit while the receiver unit comprised a similar PCB-LPDA and the FSH4 handheld spectrum analyser. With the transmitting antenna fixed at a height of \SI{5}{m} and the receiving antenna at \SI{2}{m}, the maximum received power was recorded at five distances between \SI{20}{} and \SI{200}{m}. This was done with Some results are shown in Fig \ref{fig:pl_control}. Statistical analysis of the predictions is shown in Table \ref{tb:stats1}. Although all three FWPM simulations yield very good predictions, based on the root mean square errors the best approximation to the measurement scenario is the medium dry ground setup. More significantly, it can be seen that the question of path loss below \SI{1}{km} is not trivially equivalent to free space loss as often presumed. There is a significant deviation which can be costly where accuracy is required.
+
+A PCB-LPDA was connected to the Anapico DC signal generator to form the transmitting unit while the receiver unit comprised a similar PCB-LPDA and the FSH4 handheld spectrum analyser. With the transmitting antenna fixed at a height of \SI{5}{m} and the receiving antenna at \SI{2}{m}, the maximum received power was recorded at five distances between \SI{20}{} and \SI{200}{m}. Some results are shown in Fig \ref{fig:pl_control} while statistical analysis of the predictions is presented in Table \ref{tb:stats1}. Although all three FWPM simulations yield very good predictions, based on the root mean square errors the best approximation to the measurement scenario is the medium dry ground setup. More significantly, it can be seen that the question of path loss below \SI{1}{km} is not trivially equivalent to free space loss as often presumed. The maximum residual for FSL predictions lies \num{4.65} standard deviations from the mean but is \num{3.68} for the worst performing FWPM prediction. Evidently, free space path loss exhibits a significant deviation which can be costly where accuracy is required.
 %
-\begin{table*}%[!ht]
+\begin{table*}[!ht]
 	\caption{Mean Prediction Error and RMSE Analysis for the FWPM Validation}
 	\label{tb:stats1}
 	\centering
 	\renewcommand{\arraystretch}{1.3}
 	\setlength{\tabcolsep}{3pt}
-	\begin{tabular*}{\linewidth}{ @{\extracolsep{\fill}} l*{16}c @{}}\toprule %{lcccccccccccccccc}
-		$d_m$ & \multicolumn{4}{c}{Mean Prediction Error, $\bar\varepsilon$ [\SI{}{dB}]} & \multicolumn{4}{c}{Maximum Residual, $\varepsilon_{\text{max}}$ [\SI{}{dB}]} & \multicolumn{4}{c}{Standard Dev, $\sigma_{\bar\varepsilon}$ [\SI{}{dB}]} & \multicolumn{4}{c}{RMSE [\SI{}{dB}]}\\ \cmidrule{1-1} \cmidrule{2-5} \cmidrule{6-9} \cmidrule{10-13} \cmidrule{14-17}%\hline\hline
-		 $[\SI{}{m}]$ & dry & med & wet & FSL  & dry & med & wet & FSL & dry & med & wet & FSL & dry & med & wet & FSL\\ \cmidrule{1-1} \cmidrule{2-5} \cmidrule{6-9} \cmidrule{10-13} \cmidrule{14-17}
-		20 & 1.96 & 2.36 & 2.65 & 8.41 &{} 8.44 & 7.42 & 8.34 & 13.87 &{} 2.85 & 2.19 & 2.22 & 2.33 &{} 3.46 & 3.22 & 3.45 & 8.73\\
-		50 & 2.50 & 2.92 & 3.25 & 8.35 &{} 16.05 & 14.76 & 14.06 & 19.70 &{} 3.92 & 3.71 & 3.92 & 4.44 &{} 4.65 & 4.71 & 5.09 & 9.45\\
-		100 & 2.54 & 2.69 & 2.82 & 6.86 &{} 13.40 & 12.67 & 12.23 & 18.13 &{} 5.54 & 4.58 & 4.08 & 3.73 &{} 6.09 & 5.31 & 4.96 & 7.81\\
-		150 & 0.91 &  1.21 & 1.42 & 5.74 &{} 16.33 & 16.18 & 16.17 & 23.21 &{} 4.30 & 3.84 & 3.71 & 5.03 &{} 4.39 & 4.02 & 3.96 & 7.63\\
-		200 & 2.01 & 1.98 & 1.97 & 4.54 &{} 8.00 & 8.02 & 8.04 & 11.21 &{} 1.87 & 1.97 & 2.06 & 2.97 &{} 2.75 & 2.78 & 2.85  & 5.43\\ \cmidrule{1-1} \cmidrule{2-5} \cmidrule{6-9} \cmidrule{10-13} \cmidrule{14-17}
+	\begin{tabular*}{\linewidth}{ @{\extracolsep{\fill}} l*{16}c @{}}\toprule
+		$d_m$ & \multicolumn{4}{c}{Prediction Error, $\bar\varepsilon$ [\SI{}{dB}]} & \multicolumn{4}{c}{Max Residual, $\varepsilon_{\text{max}}$ [\SI{}{dB}]} & \multicolumn{4}{c}{Standard Dev, $\sigma_{\bar\varepsilon}$ [\SI{}{dB}]} & \multicolumn{4}{c}{RMSE [\SI{}{dB}]}\\ \cmidrule{1-1} \cmidrule{2-5} \cmidrule{6-9} \cmidrule{10-13} \cmidrule{14-17}%\hline\hline
+		$[\SI{}{m}]$ & dry & med & wet & FSL & dry & med & wet & FSL & dry & med & wet & FSL & dry & med & wet & FSL\\
+		 \cmidrule{1-1} \cmidrule{2-5} \cmidrule{6-9} \cmidrule{10-13} \cmidrule{14-17}
+		20   & 1.96 & 2.36 & 2.65 & 8.41 &{} 8.44  & 7.42  & 8.34  & 13.87 &{} 2.85 & 2.19 & 2.22 & 2.33 &{} 3.46 & 3.22 & 3.45 & 8.73\\
+		50   & 2.50 & 2.92 & 3.25 & 8.35 &{} 16.05 & 14.76 & 14.06 & 19.70 &{} 3.92 & 3.71 & 3.92 & 4.44 &{} 4.65 & 4.71 & 5.09 & 9.45\\
+		100  & 2.54 & 2.69 & 2.82 & 6.86 &{} 13.40 & 12.67 & 12.23 & 18.13 &{} 5.54 & 4.58 & 4.08 & 3.73 &{} 6.09 & 5.31 & 4.96 & 7.81\\
+		150  & 0.91 & 1.21 & 1.42 & 5.74 &{} 16.33 & 16.18 & 16.17 & 23.21 &{} 4.30 & 3.84 & 3.71 & 5.03 &{} 4.39 & 4.02 & 3.96 & 7.63\\
+		200  & 2.01 & 1.98 & 1.97 & 4.54 &{} 8.00  & 8.02  & 8.04  & 11.21 &{} 1.87 & 1.97 & 2.06 & 2.97 &{} 2.75 & 2.78 & 2.85 & 5.43\\ \cmidrule{1-1} \cmidrule{2-5} \cmidrule{6-9} \cmidrule{10-13} \cmidrule{14-17}
 		mean & 1.99 & 2.23 & 2.42 & 6.78 &{} 12.44 & 11.81 & 11.77 & 17.22 &{} 3.70 & 3.26 & 3.20 & 3.70 &{} 4.27 & 4.01 & 4.06 & 7.81\\ \bottomrule
 	\end{tabular*}
 \end{table*}
 %
-\subsection{Case Study: Field Measurements in the Karoo}
-%\subsection{Measurements Across Irregular Terrain} % Field Measurements in the Karoo
-The Karoo is a semi-desert region in South Africa's Northern Cape Province and is home to MeerKAT -- a Square Kilometre Array Telescope precursor. Propagation modelling has a vital role to play in the furtherance of good EMC and spectrum management practices wherein predictions form part of the basis on which RFI threshold levels are determined. The need for accuracy cannot therefore be overstated.\\
-Recently, a comparative study used data obtained at the MeerKAT site to examine the efficacy of ITU-R P.\num{1546} and ITM models for path loss predictions at shorter path lengths and lower transceiver heights than originally intended \cite{Phiri}. While acceptable error margins were reported, it is desirable to achieve higher accuracy and synthesize a site-specific model to aid electromagnetic characterisation of the MeerKAT environment.
-
-Karoo data analysed here is the same dataset as in \cite{Phiri}. Equipment used during the measurement campaign included a CPS1 pulse generator, LPDA (R\&S HL033) and a horn antenna (EM-7020) at the transmitting end. On the receiving end, two LPDA's (R\&S HL023 and a custom-built PCB-LPDA) were deployed in conjunction with a real-time analyser (RTA). Use of the pulser and RTA made broadband time-domain recordings possible, speeding up the survey time significantly. Measurements were recorded for vertical polarization transmissions at five T-R separation distances between \SI{50}{} and \SI{3600}{m} for transmitter heights of \SI{5}{} and \SI{7.5}{m}. With free space loss as a reference, measured and predicted path loss curves are shown Figs \ref{fig:karoo_LL} and \ref{fig:karoo_LH} while the statistical analysis on the FWPM predictions is shown in Table \ref{tb:stats2}. %as a first step in the realization of a site-specific model.
-%
-%The uncertainty due to unknown transmitter gain was removed in this dataset. Nonetheless, it was observed that the data oddly deviated from predictions at the lower ($<\SI{0.5}{GHz}$) rather than higher frequencies. These deviations were attributed to increased interactions with the terrain in respect of Fresnel clearance zones \cite{MESA}.
-\begin{figure*}
+\begin{figure*}[!ht]
 	\centering
-	\subfloat[tight]{\includegraphics[width=0.32\linewidth]{hockey-20m}%
-	\label{fig:pl20}}%
+	\subfloat[]{\includegraphics[width=0.32\linewidth]{hockey-20m}%
+		\label{fig:pl20}}%
 	\hfil
-	\subfloat[tight]{\includegraphics[width=0.32\linewidth]{hockey-50m.pdf}%
-	\label{fig:pl50}}%
+	\subfloat[]{\includegraphics[width=0.32\linewidth]{hockey-50m.pdf}%
+		\label{fig:pl50}}%
 	\hfil
-	\subfloat[tight]{\includegraphics[width=0.32\linewidth]{hockey-100m.pdf}%
-	\label{fig:pl100}}
+	\subfloat[]{\includegraphics[width=0.32\linewidth]{hockey-100m.pdf}%
+		\label{fig:pl100}}
 	\caption{Open area measurements and predicted path loss at T-R separations of \protect\subref{fig:pl20} \SI{20}{m}, \protect\subref{fig:pl50} \SI{50}{m} and \protect\subref{fig:pl100} \SI{100}{m}. In all cases $h_t = \SI{5}{m}$ and $h_r = \SI{2}{m}$}
 	\label{fig:pl_control}
 \end{figure*}
 %
+\subsection{Case Study: Field Measurements in the Karoo}
+The Karoo is a semi-desert region in South Africa's Northern Cape Province and is home to MeerKAT -- a Square Kilometre Array Telescope precursor. Propagation modelling has a vital role to play in the furtherance of good EMC and spectrum management practices wherein predictions form part of the basis on which RFI threshold levels are determined. The need for accuracy cannot therefore be overstated.\\
+Recently, a comparative study used data obtained at the MeerKAT site to examine the efficacy of ITU-R P.\num{1546} and ITM models for path loss predictions at shorter path lengths and lower transceiver heights than originally intended \cite{Phiri}. While acceptable error margins were reported, it is desirable to achieve higher accuracy and synthesize a site-specific model to aid electromagnetic characterisation of the MeerKAT environment.
 
-Electrical parameters corresponding to wet ground were found to provide the best fit to Karoo data. Assuming that the predominant source of attenuation is ground loss, this would suggest that the relative permittivity of Karoo soil is on the order of \num{32}. This value stands in stark contrast to attempts that have been made at extracting the complex permittivity of Karoo soil such as in \cite{Braam2011} where a value of \num{3.8} (typical for dry ground) is reported for the S and X bands. However, this is presently not problematic since this work does not attempt to determine the value of $\epsilon_r$ but focuses on accounting for its effects with respect to obtaining the best predictions. Moreover, this discrepancy might be due to differences in moisture content at the time of the respective measurements. Determining the exact values of complex permittivity is desirable but highly challenging particularly since properties such as compactness and moisture content of the soil change as soon as it has been removed from its locale. Hence, for propagation modelling, finding the best fit using existing data may be the most practical approach.\\
-It is interesting to note that the although implemented assuming a flat earth, the FWPM predictions follow the measured data quite well even above \SI{1}{km}. On the other hand, free space loss yields poor predictions across the band. We reiterate that the value of path loss at short distances ($<\SI{1}{km}$) cannot be presumed to be free space loss especially when transceiver heights are low.\\
-Fig \ref{fig:reflect_grazing} shows the magnitude of the Fresnel reflection coefficient as a function of grazing angle $\psi$ (dotted line) as well as the dependence of $\psi$ on distance (solid line). It is apparent in Fig \ref{fig:reflect_grazing} that when $d_m>\SI{500}{m}$ the grazing decreases asymptotically towards zero. These small grazing angles yield a reflection coefficient of \num{-1} as predicted by equation (\ref{eq:Rv}), indicating a phase shift of $180^\circ$ which is typically associated with overlap and cancellation of the direct and reflected waves. It is plausible that the relative `flattening' of the path loss curves at \SI{700}{}, \SI{1800}{} and \SI{3600}{m} is due to this effect which is most pronounced at the higher frequencies. %A quasi-Brewster angle is encountered at $5.7^\circ$
+Karoo data analysed here is the same dataset as in \cite{Phiri}. Equipment used during the measurement campaign included a CPS1 pulse generator, LPDA (R\&S HL033) and a horn antenna (EM-7020) at the transmitting end. On the receiving end, two LPDA's (R\&S HL023 and a custom-built PCB-LPDA) were deployed in conjunction with a real-time analyser (RTA). Use of the pulser and RTA made broadband time-domain recordings possible, speeding up the survey time significantly. Measurements were recorded for vertical polarization transmissions at five T-R separation distances between \SI{50}{} and \SI{3600}{m} for transmitter heights of \SI{5}{} and \SI{7.5}{m}. With free space loss as a reference, measured and predicted path loss curves are shown in Figs \ref{fig:karoo_LL} and \ref{fig:karoo_LH}. % while the statistical analysis on the FWPM predictions is shown in Table \ref{tb:stats2}. %as a first step in the realization of a site-specific model.
 %
-\begin{figure*}%[!h]
+%The uncertainty due to unknown transmitter gain was removed in this dataset. Nonetheless, it was observed that the data oddly deviated from predictions at the lower ($<\SI{0.5}{GHz}$) rather than higher frequencies. These deviations were attributed to increased interactions with the terrain in respect of Fresnel clearance zones \cite{MESA}.
+
+Statistical analysis on the FWPM predictions is provided in Table \ref{tb:stats2}. The row designated mean 1 is the average value corresponding to path lengths below \SI{1}{km} while mean 2 is the average across all path lengths. Predictions of the free space loss (FSL) model are acceptable in respect of the \SI{10}{} -- \SI{15}{dB} RMSE allowance for rural areas. Under a kilometre, \SI{6.70}{} and \SI{8.06}{dB} were obtained for the two respective cases, while \SI{11.22}{} and \SI{11.53}{dB} were obtained overall. However, if the individual path is considered, FSL predictions fall outside the acceptable margin above \SI{1}{km}. In contrast, \SI{3.08}{} and \SI{3.57}{dB} RMSE is obtained overall for the FWPM predictions.\\
+In terms of relative error, the FWPM yields a fractional error that is less than \num{0.05} which is equivalent to a confidence level (accuracy) greater than \SI{95}{\%} which is desired. FSL modelling fails this test with \SI{93}{\%} accuracy at best. Correlation is strong for both models particularly at short ranges. Slightly more linear closeness is seen in the FSL model in the second configuration ($h_t=\SI{7.5}{m}$) but overall the FWPM performs better with correlation coefficients of \num{0.729} and \num{0.795} versus \num{0.633} and \num{0.757} for FSL.
+
+Electrical parameters corresponding to wet ground were found to provide the best fit to Karoo data. Assuming that the predominant source of attenuation is ground loss, this would suggest that the relative permittivity of Karoo soil is on the order of \num{32}. This value stands in stark contrast to attempts that have been made at extracting the complex permittivity of Karoo soil such as in \cite{Braam2011} where a value of \num{3.8} (typical for dry ground) is reported for the S and X bands. However, this is presently not problematic since this work does not attempt to determine the value of $\epsilon_r$ but focuses on accounting for its effects with respect to obtaining the best predictions. It is probable that the shallow aquifers of the Karoo result in a higher soil moisture content than typical arid regions.\\ %Moreover, this discrepancy might be due to differences in moisture content at the time of the respective measurements. 
+Determining the exact values of complex permittivity is desirable but highly challenging particularly since properties such as compactness and moisture content of the soil change as soon as it has been removed from its locale. Hence, for propagation modelling, finding the best fit using existing data may be the most practical approach.
+%
+\begin{figure*}[!ht]
 	\centering
 	\subfloat[]{\includegraphics[width=0.32\linewidth]{Karoo_LL_50m}%
 	\label{fig:karoo_LL_50m}}%
@@ -413,7 +411,7 @@ Fig \ref{fig:reflect_grazing} shows the magnitude of the Fresnel reflection coef
 	\label{fig:karoo_LL}%
 \end{figure*}%
 %  
-\begin{figure*}%[!h]
+\begin{figure*}[!ht]
 	\centering
 	\subfloat[]{\includegraphics[width=0.32\linewidth]{Karoo_LH_700m}%
 	\label{fig:karoo_LH_700m}}%
@@ -427,13 +425,13 @@ Fig \ref{fig:reflect_grazing} shows the magnitude of the Fresnel reflection coef
 	\label{fig:karoo_LH}%
 \end{figure*}%
 %\subsection{Statistical Error Analysis}
-\begin{table*}
+\begin{table*}[!ht]
 	\centering
 	\caption{Statistical Analysis on FWPM and FSL for Path Loss Predictions in the Karoo}
 	\label{tb:stats2}
 	\renewcommand{\arraystretch}{1.3}
 	\setlength{\tabcolsep}{3pt}
-	\begin{tabular*}{0.85\linewidth}{ @{\extracolsep{\fill}} l*{10}r @{}}\toprule
+	\begin{tabular*}{\linewidth}{ @{\extracolsep{\fill}} l*{10}c @{}}\toprule
 		\multicolumn{11}{c}{Case I: $h_t = \SI{5}{m}$, $h_r = \SI{2}{m}$} \\    \midrule
 		$d_m$& \multicolumn{2}{c}{Prediction Error, $\bar\varepsilon$} & \multicolumn{2}{c}{RMSE [\SI{}{dB}]} & \multicolumn{2}{c}{Relative Error} & \multicolumn{2}{c}{Accuracy} & \multicolumn{2}{c}{Corr Coefficient, $\rho$} \\ \cmidrule{1-1} \cmidrule{2-3} \cmidrule{4-5} \cmidrule{6-7} \cmidrule{8-9} \cmidrule{10-11}
 		[\SI{}{m}]     & FWPM  & FSL   & FWPM  & FSL   & FWPM  & FSL   & FWPM  & FSL   & FWPM  & FSL \\
@@ -457,23 +455,27 @@ Fig \ref{fig:reflect_grazing} shows the magnitude of the Fresnel reflection coef
 	\end{tabular*}%
 \end{table*}%
 %
-\begin{figure}
+
+Fig \ref{fig:reflect_grazing} shows the magnitude of the Fresnel reflection coefficient as a function of incidence angle $\psi$ (dotted line) as well as the dependence of $\psi$ on distance (solid line) for $h_t=\SI{5}{m}$. Beyond about \SI{1}{km} the angle of incidence is negligibly small so that the Fresnel reflection coefficients are independent of complex permittivity and a PEC is approximated. That is, grazing angles yield a reflection coefficient of \num{-1} as predicted by equation (\ref{eq:Rv}), indicating a phase shift of $180^\circ$ which is typically associated with overlap and cancellation of the direct and reflected waves. It is plausible that the relative `flattening' of the path loss curves at \SI{700}{}, \SI{1800}{} and \SI{3600}{m} is due to this effect which is most pronounced at the higher frequencies. %A quasi-Brewster angle is encountered at $5.7^\circ$
+%
+\begin{figure} %[!ht]
 	\includegraphics[width=\linewidth]{ground_reflection_coefficient_grazing_angle}
 	\caption{Fresnel reflection coefficient and the variation of grazing angle with distance}
 	\label{fig:reflect_grazing}
 \end{figure} %
-
-In Table \ref{tb:stats2}, mean 1 is the average value corresponding to path lengths below \SI{1}{km} while mean 2 is the average across all path lengths. Predictions of the free space loss (FSL) model are  acceptable in respect of the \SI{10}{} -- \SI{15}{dB} RMSE allowance for rural areas. Under a kilometre, \SI{6.70}{} and \SI{8.06}{dB} were obtained for the two respective cases, while \SI{11.22}{} and \SI{11.53}{dB} were obtained overall. However, if the individual path is considered, FSL predictions fall outside the acceptable margin above \SI{1}{km}
-% RMSE
-% RE and Accuracy
-% Correlation Coefficient
-
+%
 \section{Conclusion}\label{Conclusion}
+In the Full Wave Propagation Model (FWPM) we have illustrated the implementation of an existing MoM-based code (FEKO) to predict path loss. The novelty in our work lies in the recreation of a real world measurement scenario wherein antenna characteristics and the influence of the earth are inherently accounted for. Although applied assuming a flat ground, statistical analysis on the FWPM predictions of path loss in the Karoo yielded an impressively low RMSE of $<\SI{4}{dB}$. The ability of the FWPM to model propagation over obstacles illustrates the versatility of the method to incorporate more sophisticated scenarios. This has the potential to facilitate easier development of `loss' maps and would be a vital tool for investigating coupling mechanisms, particularly in respect of facilities like MeerKAT. % On the other hand, although free space loss predictions fall within acceptable error margins below \SI{1}{km}, the prediction accuracy is unsatisfactory.\\
+%This study suggests that the Karoo soil is good rather than bad ground as per the general categorization of types of surfaces.
+
+\section*{Acknowledgement}
+The financial assistance of the South African SKA Project (SKA SA) towards this research is hereby acknowledged. Opinions expressed and conclusions arrived at are those of the author and are not necessarily to be attributed to the SKA SA. (\url{www.ska.ac.za})\\
+The authors thank EMC consultants MESA Solutions for sharing data and engaging in meaningful discussion. Special thanks to Anneke Bester for technical support during measurements in Stellenbosch. 
 
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv,tj_Journ_paper_refs}
 
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{./tj.jpg}}]{Temwani J. Phiri}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{./tj2.jpg}}]{Temwani J. Phiri}
 Biography text here.
 \end{IEEEbiography}
 

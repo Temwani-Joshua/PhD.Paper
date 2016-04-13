@@ -82,7 +82,7 @@ C.~A. Balanis, \emph{{Advanced Engineering Electromagnetics}}, 2nd~ed.\hskip
 
 \bibitem{P527}
 ITU-R, ``{Rec. ITU-R P.527-3: Electrical Characteristics of the Surface of the
-  Earth},'' Tech. Rep., 1992.
+  Earth},'' {International Telecommunication Union}, Tech. Rep., 1992.
 
 \bibitem{Norton37}
 {K.A. Norton}, ``{The Propagation of Radio Waves Over the Surface of the Earth
@@ -105,5 +105,22 @@ ITU-R, ``{Rec. ITU-R P.527-3: Electrical Characteristics of the Surface of the
   Measurements of Karoo Soil for the Square Kilometre Array},'' in
   \emph{{International Conference on Electromagnetics in Advanced Applications
   (ICEAA)}}, 2011.
+
+\bibitem{Hviid95}
+{J.T. Hviid}, {J.B. Andersen}, {J. Toftgard}, and {J. Bojer}, ``Terrain-based
+  propagation model for rural area - an integral equation approach,''
+  \emph{IEEE Transactions on Antennas and Propagation}, vol.~43, no.~1, pp.
+  41--46, Jan 1995.
+
+\bibitem{Yagbasan2010}
+{A. Yagbasan}, {C.A. Tunc} \emph{et~al.}, ``Characteristic basis function
+  method for solving electromagnetic scattering problems over rough terrain
+  profiles,'' \emph{IEEE Transactions on Antennas and Propagation}, vol.~58,
+  no.~5, pp. 1579--1589, May 2010.
+
+\bibitem{Brennan2014}
+{C. Brennan} and {D. Trinh}, ``Fullwave computation of path loss in urban
+  areas,'' in \emph{Antennas and Propagation (EuCAP), 2014 8th European
+  Conference on}, April 2014, pp. 1124--1127.
 
 \end{thebibliography}
